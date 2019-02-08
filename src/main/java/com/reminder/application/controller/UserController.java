@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.reminder.application.config.UserValidator;
 import com.reminder.application.model.User;
 import com.reminder.application.service.SecurityService;
 import com.reminder.application.service.UserService;
+import com.reminder.application.validator.UserValidator;
 
 @Controller
 public class UserController {
+	
     @Autowired
     private UserService userService;
 
@@ -25,10 +26,10 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
@@ -41,9 +42,7 @@ public class UserController {
         }
 
         userService.save(userForm);
-
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/welcome";
     }
 
