@@ -7,6 +7,8 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
     private Long id;
+    private String name;
+    private String dob;
     private String username;
     private String password;
     private String passwordConfirm;
@@ -22,7 +24,24 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
+    
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String getUsername() {
         return username;
     }
 
