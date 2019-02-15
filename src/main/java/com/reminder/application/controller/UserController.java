@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.reminder.application.config.UserValidator;
 import com.reminder.application.model.User;
 import com.reminder.application.service.SecurityService;
 import com.reminder.application.service.UserService;
-import com.reminder.application.validator.UserValidator;
 
 @Controller
 public class UserController {
