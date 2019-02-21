@@ -9,22 +9,30 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.reminder.application.model.Employee;
 import com.reminder.application.model.User;
+import com.reminder.application.service.EmployeeService;
 import com.reminder.application.service.SecurityService;
 import com.reminder.application.service.UserService;
+import com.reminder.application.validator.EmployeeValidator;
 import com.reminder.application.validator.UserValidator;
 
 @Controller
-public class UserController {
+public class MainController {
 	
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @Autowired
     private SecurityService securityService;
 
     @Autowired
     private UserValidator userValidator;
+    
+    @Autowired
+    private EmployeeValidator employeeValidator;
 
     
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -60,5 +68,20 @@ public class UserController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
+    }
+   
+    
+    /* Employee controller */
+    @RequestMapping(value = "/employee", method = RequestMethod.POST)
+    public String employee(@ModelAttribute("employeeForm") Employee employeeForm, BindingResult bindingResult, Model model) {
+    	
+    	employeeValidator.validate(employeeForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "welcome";
+        }
+
+        employeeService.save(employeeForm);
+        return "redirect:/welcome";
     }
 }

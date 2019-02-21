@@ -6,6 +6,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User {
+	
     private Long id;
     private String name;
     private String dob;
